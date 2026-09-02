@@ -1,0 +1,11 @@
+node_modules/
+.wrangler/
+.env
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*
+.DS_Store
+
+# Camera originals. 5-18 MB each; the deployable copies live in public/assets.
+assets/img/src/

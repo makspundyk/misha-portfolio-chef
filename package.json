@@ -1,0 +1,13 @@
+{
+  "name": "chef-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Chef CV and portfolio, laid out as a tasting menu. Static site for Cloudflare Pages.",
+  "scripts": {
+    "dev": "node serve.mjs",
+    "dev:cf": "wrangler pages dev public",
+    "deploy": "wrangler pages deploy public",
+    "check": "node tools/check-assets.mjs"
+  }
+}

@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mykhailo Savchuk — Head Chef</title>
+<meta name="description" content="Head chef and chef patron. Modern European cooking built around vegetables, fish and precision. Portfolio, service history and signature dishes.">
+<meta name="theme-color" content="#131610">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23131610'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23E9E3D6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Archivo:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/src/css/style.css">
+<script type="module" src="/src/js/main.js"></script>
+</head>
+<body>
+
+<a class="skip" href="#cover">Skip to content</a>
+
+<header class="topbar" id="topbar">
+  <a class="topbar__mark" href="#cover"><span class="topbar__initials">MS</span><span class="topbar__name">Mykhailo Savchuk</span></a>
+  <nav class="topbar__nav" aria-label="Sections">
+    <a href="#chef">Chef</a>
+    <a href="#history">History</a>
+    <a href="#dishes">Dishes</a>
+    <a href="#house">EatMe</a>
+    <a href="#skills">Skills</a>
+  </nav>
+  <a class="topbar__cta" href="#contact">Contact</a>
+</header>
+
+<!-- ============================================================ COVER -->
+<section class="cover" id="cover">
+  <div class="cover__plate" aria-hidden="true">
+    <img src="/assets/img/menu/hero.jpg" alt="" width="2000" height="2000" fetchpriority="high">
+  </div>
+
+  <div class="cover__inner">
+    <p class="eyebrow cover__eyebrow">Chernivtsi, Ukraine <span class="arrow">&rarr;</span> London, UK</p>
+
+    <h1 class="cover__name">
+      <span class="cover__given">Mykhailo</span>
+      <span class="cover__family">Savchuk</span>
+    </h1>
+
+    <p class="cover__role">Head Chef <span class="dot">·</span> Chef Patron</p>
+    <p class="cover__strap">Modern European cooking, built around vegetables, fish and precision.</p>
+
+    <dl class="cover__facts">
+      <div><dt>Right to work</dt><dd data-fill="rightToWork"></dd></div>
+      <div><dt>Languages</dt><dd data-fill="english"></dd></div>
+      <div><dt>Availability</dt><dd data-fill="available"></dd></div>
+    </dl>
+
+    <div class="cover__actions">
+      <a class="btn btn--solid" href="#contact">Book a trial shift</a>
+      <button class="btn btn--ghost" type="button" data-print>Save as PDF</button>
+    </div>
+  </div>
+
+  <p class="cover__scroll" aria-hidden="true">Menu follows</p>
+</section>
+
+<main>
+
+<!-- ============================================================ CHEF -->
+<section class="band" id="chef">
+  <div class="wrap">
+    <p class="eyebrow">Amuse-bouche</p>
+    <div class="chef">
+      <div class="chef__text" data-fill-intro></div>
+      <ul class="numbers" data-fill-numbers></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ HISTORY -->
+<section class="band band--rule" id="history">
+  <div class="wrap">
+    <header class="head">
+      <p class="eyebrow">Service history</p>
+      <h2 class="head__title">Four kitchens, in the order they happened</h2>
+    </header>
+    <ol class="history" data-fill-history></ol>
+  </div>
+</section>
+
+<!-- ============================================================ DISHES -->
+<section class="band band--menu" id="dishes">
+  <div class="wrap">
+    <header class="head head--menu">
+      <p class="eyebrow">Signature dishes</p>
+      <h2 class="head__title">The menu</h2>
+      <p class="head__note">Twenty-four dishes I wrote, cooked and photographed. Tap a plate for the full picture.</p>
+    </header>
+
+    <div class="courses" role="tablist" aria-label="Filter dishes by course" data-fill-courses></div>
+
+    <ul class="menu" data-fill-menu></ul>
+  </div>
+</section>
+
+<!-- ============================================================ HOUSE -->
+<section class="band band--dark" id="house">
+  <div class="wrap">
+    <div class="house">
+      <div class="house__text">
+        <p class="eyebrow eyebrow--light">The house project</p>
+        <h2 class="house__title">EatMe</h2>
+        <p class="house__meta">
+          <span data-fill-house="role"></span><span class="dot">·</span><span data-fill-house="place"></span><span class="dot">·</span><span data-fill-house="years"></span>
+        </p>
+        <div data-fill-house-body></div>
+        <dl class="house__facts" data-fill-house-facts></dl>
+        <p class="house__links">
+          <a data-fill-house="instagram" href="#" rel="noopener noreferrer" target="_blank"></a>
+          <span class="dot">·</span>
+          <span data-fill-house="shopLabel"></span>
+        </p>
+      </div>
+      <div class="house__bottles" data-fill-bottles></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ SKILLS -->
+<section class="band band--rule" id="skills">
+  <div class="wrap">
+    <header class="head">
+      <p class="eyebrow">Stations</p>
+      <h2 class="head__title">What I bring to a pass</h2>
+    </header>
+    <div class="skills" data-fill-skills></div>
+  </div>
+</section>
+
+<!-- ============================================================ TRAINING -->
+<section class="band band--rule" id="training">
+  <div class="wrap">
+    <header class="head">
+      <p class="eyebrow">Training</p>
+      <h2 class="head__title">Certification</h2>
+    </header>
+    <ul class="training" data-fill-training></ul>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================ CONTACT -->
+<footer class="band band--cover" id="contact">
+  <div class="wrap">
+    <p class="eyebrow eyebrow--light">Reservations</p>
+    <h2 class="contact__title">Give me a section and a service.</h2>
+    <p class="contact__line">The fastest way to judge a chef is to cook next to him. I will travel for a trial shift.</p>
+
+    <ul class="contact__list" data-fill-contact></ul>
+
+    <p class="contact__foot">
+      <span data-fill="rightToWork"></span>
+    </p>
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<dialog class="lb" id="lightbox" aria-label="Dish photograph">
+  <button class="lb__close" type="button" data-lb-close aria-label="Close">&times;</button>
+  <button class="lb__nav lb__nav--prev" type="button" data-lb-prev aria-label="Previous dish">&#8249;</button>
+  <button class="lb__nav lb__nav--next" type="button" data-lb-next aria-label="Next dish">&#8250;</button>
+  <figure class="lb__figure">
+    <div class="lb__shots">
+      <img class="lb__img" id="lbImgA" alt="">
+      <img class="lb__img lb__img--alt" id="lbImgB" alt="">
+    </div>
+    <figcaption class="lb__caption">
+      <p class="lb__section" id="lbSection"></p>
+      <h3 class="lb__name" id="lbName"></h3>
+      <p class="lb__desc" id="lbDesc"></p>
+    </figcaption>
+  </figure>
+</dialog>
+
+</body>
+</html>
