@@ -6,7 +6,7 @@
  * script-src 'self', which is what stops an injected <script> from running.
  */
 
-import { CHEF, NUMBERS, HISTORY, DISHES, COURSES, HOUSE, SKILLS, TRAINING } from './data.js';
+import { CHEF, NUMBERS, HISTORY, DISHES, COURSES, HOUSE, FEED, SKILLS, TRAINING } from './data.js';
 
 const $  = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
@@ -101,7 +101,8 @@ const dishCard = (dish, index) => {
     ]),
     el('span', { className: 'dish__desc', textContent: dish.desc })
   ]);
-  button.addEventListener('click', () => openPlate(dish));
+  button.addEventListener('click', () =>
+    openViewer(visible.map(dishFrame), visible.indexOf(dish)));
 
   const item = el('li', { className: 'dish' }, button);
   item.dataset.reveal = '';
@@ -138,17 +139,22 @@ courseBar.append(
 
 renderMenu('all');
 
-/* ----------------------------------------------------------------- lightbox */
+/* ------------------------------------------------------------------- viewer */
 
-const lb      = $('#lightbox');
-const lbImgA  = $('#lbImgA');
-const lbImgB  = $('#lbImgB');
-const lbName  = $('#lbName');
-const lbDesc  = $('#lbDesc');
-const lbSect  = $('#lbSection');
+/**
+ * One viewer serves both the menu and the feed. It takes a list of frames —
+ * `{ images, title, sub, tag }` — and an index, so neither caller knows the
+ * other exists.
+ */
+const lb     = $('#lightbox');
+const lbImgA = $('#lbImgA');
+const lbImgB = $('#lbImgB');
+const lbName = $('#lbName');
+const lbDesc = $('#lbDesc');
+const lbSect = $('#lbSection');
 
-// Which dishes have a second photograph. Written once here rather than probed
-// at runtime, so a missing file is a data bug and not a broken image.
+// Which dishes were photographed twice. Written down rather than probed, so a
+// missing file is a data bug instead of a broken image.
 const TWO_SHOTS = new Set([
   'omelette-rolls','green-fritters','rye-club','chicken-roulade','greek-salad',
   'veg-muffins','mozzarella-salad','chicken-cutlets','hake-sweet-potato',
@@ -156,35 +162,57 @@ const TWO_SHOTS = new Set([
   'prawn-quail-salad','salmon-mussel-salad','crumbed-chicken','fish-roulade'
 ]);
 
-let current = 0;
+const dishFrame = (dish) => ({
+  images: TWO_SHOTS.has(dish.slug)
+    ? [`/assets/img/menu/${dish.slug}-full.jpg`, `/assets/img/menu/${dish.slug}-alt.jpg`]
+    : [`/assets/img/menu/${dish.slug}-full.jpg`],
+  title: dish.name,
+  sub: dish.desc,
+  tag: `${dish.section} section`
+});
 
-function openPlate(dish) {
-  current = visible.indexOf(dish);
-  paintPlate();
+const postFrame = (post) => ({
+  images: [`/assets/img/feed/${post.slug}-full.jpg`],
+  title: post.caption,
+  sub: '',
+  tag: post.tag
+});
+
+let frames = [];
+let cursor = 0;
+
+function openViewer(list, index) {
+  frames = list;
+  cursor = index;
+  paintFrame();
   if (!lb.open) lb.showModal();
 }
 
-function paintPlate() {
-  const dish = visible[current];
-  if (!dish) return;
-  lbImgA.src = `/assets/img/menu/${dish.slug}-full.jpg`;
-  lbImgA.alt = dish.name;
-  if (TWO_SHOTS.has(dish.slug)) {
-    lbImgB.src = `/assets/img/menu/${dish.slug}-alt.jpg`;
-    lbImgB.alt = `${dish.name}, second angle`;
+function paintFrame() {
+  const frame = frames[cursor];
+  if (!frame) return;
+
+  lbImgA.src = frame.images[0];
+  lbImgA.alt = frame.title;
+
+  if (frame.images[1]) {
+    lbImgB.src = frame.images[1];
+    lbImgB.alt = `${frame.title}, second angle`;
     lbImgB.hidden = false;
   } else {
     lbImgB.hidden = true;
     lbImgB.removeAttribute('src');
   }
-  lbName.textContent = dish.name;
-  lbDesc.textContent = dish.desc;
-  lbSect.textContent = `${dish.section} section`;
+
+  lbName.textContent = frame.title;
+  lbDesc.textContent = frame.sub;
+  lbDesc.hidden = frame.sub === '';
+  lbSect.textContent = frame.tag;
 }
 
 const step = (delta) => {
-  current = (current + delta + visible.length) % visible.length;
-  paintPlate();
+  cursor = (cursor + delta + frames.length) % frames.length;
+  paintFrame();
 };
 
 $('[data-lb-close]').addEventListener('click', () => lb.close());
@@ -234,6 +262,143 @@ $('[data-fill-bottles]').append(
     ])
   )
 );
+
+/* --------------------------------------------------------------- feed wall */
+
+/**
+ * Two lanes of frames running against each other. Each lane holds its tiles
+ * twice: the track travels exactly half its width and starts over, which is
+ * what makes the loop seamless. The second copy is hidden from assistive tech
+ * and from the tab order — it is the same content, drawn again.
+ */
+
+const wallBox = $('[data-fill-wall]');
+
+// Seconds per tile. Multiplying by the tile count keeps both lanes moving at
+// the same speed on screen, however many frames each one holds.
+const LANE_PACE = 5.5;
+
+const tile = (post, index, list) => {
+  // The track is wider than the screen, so browser lazy-loading leaves the
+  // off-screen tiles as dark holes until the marquee drags them in. The frames
+  // carry their URL instead, and the whole wall loads when it nears the fold.
+  const img = el('img', {
+    alt: post.caption,
+    decoding: 'async', width: 620, height: 827
+  });
+  img.dataset.src = `/assets/img/feed/${post.slug}.jpg`;
+
+  const button = el('button', { type: 'button', className: 'tile' }, [
+    img,
+    el('span', { className: 'tile__cap' }, [
+      el('span', { className: 'tile__tag', textContent: post.tag }),
+      el('span', { className: 'tile__text', textContent: post.caption })
+    ])
+  ]);
+  button.addEventListener('click', () => openViewer(list.map(postFrame), index));
+  return button;
+};
+
+function buildLanes() {
+  for (const lane of FEED.lanes) {
+    const posts = FEED.posts.filter((post) => post.lane === lane.id);
+    if (!posts.length) continue;
+
+    const track = el('div', { className: 'lane__track' });
+    track.append(...posts.map((post, i) => tile(post, i, posts)));
+
+    const echo = el('div', {});
+    for (const post of posts) {
+      const copy = tile(post, posts.indexOf(post), posts);
+      copy.tabIndex = -1;
+      copy.setAttribute('aria-hidden', 'true');
+      echo.append(copy);
+    }
+    track.append(...echo.children);
+
+    const row = el('div', { className: `lane${lane.id === 'counter' ? ' lane--back' : ''}` }, [
+      el('p', { className: 'lane__label', textContent: lane.label }),
+      track
+    ]);
+    row.style.setProperty('--run', `${(posts.length * LANE_PACE).toFixed(0)}s`);
+    wallBox.append(row);
+  }
+
+  for (const img of $$('.tile img[data-src]', wallBox)) {
+    if (wallLoaded) {
+      img.src = img.dataset.src;
+      delete img.dataset.src;
+    }
+  }
+}
+
+let wallLoaded = false;
+
+const wallLoader = new IntersectionObserver(
+  (entries, self) => {
+    if (!entries.some((entry) => entry.isIntersecting)) return;
+    wallLoaded = true;
+    for (const img of $$('.tile img[data-src]', wallBox)) {
+      img.src = img.dataset.src;
+      delete img.dataset.src;
+    }
+    self.disconnect();
+  },
+  { rootMargin: '600px 0px' }
+);
+
+buildLanes();
+wallLoader.observe(wallBox);
+
+/**
+ * Upgrade the wall to the live account, if there is anything to upgrade from.
+ *
+ * The endpoint must answer with the same shape as FEED — { ok, source, posts }
+ * where each post has slug/lane/tag/caption and images already sized. Anything
+ * else, any error, any timeout: the committed selection stays on screen and the
+ * line under the note says which one the visitor is looking at. The page never
+ * shows a spinner and never shows an empty wall.
+ */
+async function refreshFeed() {
+  if (FEED.live !== true) return;
+
+  try {
+    const response = await fetch('/api/instagram', { headers: { accept: 'application/json' } });
+    if (!response.ok) return;
+
+    const body = await response.json();
+    if (body?.ok !== true || !Array.isArray(body.posts) || body.posts.length === 0) return;
+
+    FEED.posts = body.posts;
+    FEED.source = body.source ?? 'live';
+    wallBox.replaceChildren();
+    buildLanes();
+    paintProfile();
+  } catch {
+    // Offline, blocked, or malformed. The selection is already on screen.
+  }
+}
+
+function paintProfile() {
+  for (const node of $$('[data-fill-feed]')) {
+    const key = node.dataset.fillFeed;
+    if (key === 'handle') {
+      node.href = FEED.profile.url;
+      node.textContent = FEED.profile.handle;
+    } else if (key === 'follow') {
+      node.href = FEED.profile.url;
+    } else if (key === 'stats') {
+      node.textContent = `${FEED.profile.followers} followers · ${FEED.profile.span}`;
+    } else if (key === 'source') {
+      node.textContent = FEED.source === 'live'
+        ? 'Live from the account.'
+        : 'A selection from the EatMe feed, not a live embed.';
+    }
+  }
+}
+
+paintProfile();
+refreshFeed();
 
 /* ------------------------------------------------------------ skills, certs */
 

@@ -267,7 +267,7 @@ a{color:inherit}
 .band{padding-block:var(--band-y);background:var(--paper)}
 .band--rule{border-top:1px solid var(--rule-soft)}
 .band--menu{background:var(--linen)}
-.band--dark{background:var(--cover-2);color:var(--cover-ink)}
+.band--dark{background:var(--cover-2);color:var(--cover-ink);overflow:hidden}
 .band--cover{background:var(--cover);color:var(--cover-ink)}
 
 /* --- chef ----------------------------------------------------------------- */
@@ -476,6 +476,117 @@ a{color:inherit}
   .house__bottles{grid-template-columns:repeat(4,1fr)}
 }
 
+/* --- the feed wall -------------------------------------------------------
+   Two lanes running against each other, like plates crossing a pass. The
+   frames are 3:4 because that is what an Instagram profile grid is now, and
+   because a rectangle is the honest opposite of the round plates above.
+   -------------------------------------------------------------------------- */
+
+.wall{margin-top:clamp(56px,7vw,96px)}
+
+.wall__bar{
+  display:flex;align-items:center;gap:16px;
+  padding-bottom:20px;border-bottom:1px solid rgba(239,234,221,.14);
+}
+.wall__avatar{
+  flex:0 0 auto;width:58px;height:58px;border-radius:50%;
+  background:var(--brand);display:grid;place-items:center;
+}
+.wall__avatar img{width:78%;height:auto;transform:translateX(4%)}
+.wall__who{display:flex;flex-direction:column;gap:3px;min-width:0}
+.wall__handle{
+  font-family:var(--display);font-size:clamp(19px,2.2vw,24px);font-weight:400;
+  color:var(--cover-ink);text-decoration:none;
+  border-bottom:1px solid transparent;transition:border-color .25s var(--lift);
+}
+.wall__handle:hover{border-bottom-color:var(--brand)}
+.wall__stats{
+  font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--cover-ink-2);
+}
+.wall__follow{margin-left:auto;flex:0 0 auto}
+
+.wall__note{
+  margin:20px 0 0;max-width:62ch;
+  font-family:var(--display);font-weight:300;font-size:clamp(17px,1.9vw,21px);
+  line-height:1.45;color:var(--cover-ink);
+}
+.wall__source{display:block;margin-top:8px;font-family:var(--ui);font-size:12px;letter-spacing:.06em;color:var(--cover-ink-2)}
+
+.wall__lanes{
+  margin-top:clamp(28px,4vw,44px);
+  display:grid;gap:clamp(10px,1.4vw,18px);
+}
+
+.lane{
+  position:relative;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+}
+.lane__label{
+  position:absolute;z-index:3;left:var(--gut);top:10px;margin:0;
+  font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--cover-ink-2);
+  background:rgba(19,22,16,.72);padding:5px 10px;border-radius:999px;
+  backdrop-filter:blur(6px);
+  pointer-events:none;
+}
+.lane__track{
+  display:flex;gap:clamp(10px,1.4vw,18px);width:max-content;
+  animation:lane-run var(--run,110s) linear infinite;
+}
+.lane--back .lane__track{animation-direction:reverse}
+.lane:hover .lane__track,
+.lane:focus-within .lane__track{animation-play-state:paused}
+
+@keyframes lane-run{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+
+.tile{
+  flex:0 0 auto;margin:0;position:relative;
+  width:clamp(146px,16vw,214px);aspect-ratio:3/4;
+  border:0;padding:0;cursor:pointer;
+  /* A warm hold rather than a black hole while a frame is still loading. */
+  background:#232619;
+  border-radius:2px;overflow:hidden;
+  color:inherit;font:inherit;text-align:left;
+}
+.tile img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .7s var(--lift),filter .4s var(--lift);
+  filter:brightness(.92);
+}
+.tile:hover img,.tile:focus-visible img{transform:scale(1.06);filter:brightness(1)}
+
+.tile__cap{
+  position:absolute;inset:auto 0 0 0;padding:34px 12px 12px;
+  background:linear-gradient(transparent,rgba(9,11,7,.92));
+  transform:translateY(101%);opacity:0;
+  transition:transform .4s var(--lift),opacity .4s var(--lift);
+}
+.tile:hover .tile__cap,.tile:focus-visible .tile__cap{transform:none;opacity:1}
+.tile__tag{
+  display:block;margin-bottom:5px;
+  font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--brand);
+}
+.tile__text{display:block;font-size:12.5px;line-height:1.35;color:#F1EEE4}
+
+/* A moving wall on a phone is battery and motion sickness. Swipe it instead. */
+@media (max-width:760px){
+  .lane{overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;
+    -webkit-mask-image:none;mask-image:none}
+  .lane::-webkit-scrollbar{display:none}
+  .lane__track{animation:none;width:auto;padding-inline:var(--gut)}
+  .tile{scroll-snap-align:start;width:44vw}
+  .tile__cap{transform:none;opacity:1;padding-top:28px}
+  .lane__label{position:static;display:inline-block;margin:0 var(--gut) 8px;background:none;padding:0;backdrop-filter:none}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .lane__track{animation:none}
+  .lane{overflow-x:auto}
+}
+
 /* --- skills --------------------------------------------------------------- */
 
 .skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:clamp(28px,4vw,56px)}
@@ -598,7 +709,7 @@ a.contact__val:hover{color:var(--brand);border-bottom-color:var(--brand)}
   @page{margin:14mm}
   body{background:#fff;color:#000;font-size:10.5pt}
   .topbar,.cover__plate,.cover__actions,.cover__scroll,.courses,.lb,.skip,
-  .house__bottles,.plate{display:none !important}
+  .house__bottles,.plate,.wall{display:none !important}
   .cover,.band,.band--dark,.band--cover{
     background:#fff !important;color:#000 !important;
     padding-block:0 !important;min-height:0 !important;

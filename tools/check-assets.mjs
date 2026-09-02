@@ -12,7 +12,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT   = join(fileURLToPath(new URL('..', import.meta.url)));
 const PUBLIC = join(ROOT, 'public');
 
-const { DISHES, HOUSE } = await import(join(PUBLIC, 'src/js/data.js'));
+const { DISHES, HOUSE, FEED } = await import(join(PUBLIC, 'src/js/data.js'));
 
 const exists = async (path) => {
   try { await access(path); return true; } catch { return false; }
@@ -25,6 +25,20 @@ for (const dish of DISHES) {
     const rel = `assets/img/menu/${dish.slug}${suffix}.jpg`;
     if (!(await exists(join(PUBLIC, rel)))) problems.push(`missing ${rel}`);
   }
+}
+
+for (const post of FEED.posts) {
+  for (const suffix of ['', '-full']) {
+    const rel = `assets/img/feed/${post.slug}${suffix}.jpg`;
+    if (!(await exists(join(PUBLIC, rel)))) problems.push(`missing ${rel}`);
+  }
+  if (!FEED.lanes.some((lane) => lane.id === post.lane)) {
+    problems.push(`${post.slug} is in lane "${post.lane}", which no lane declares`);
+  }
+}
+
+if (!(await exists(join(PUBLIC, 'assets/brand/eatme-logo.svg')))) {
+  problems.push('missing assets/brand/eatme-logo.svg');
 }
 
 for (const bottle of HOUSE.bottles) {
@@ -62,4 +76,7 @@ if (problems.length) {
   process.exit(1);
 }
 
-console.log(`OK — ${DISHES.length} dishes, ${HOUSE.bottles.length} bottles, nothing private in public/`);
+console.log(
+  `OK — ${DISHES.length} dishes, ${FEED.posts.length} feed frames, ` +
+  `${HOUSE.bottles.length} bottles, nothing private in public/`
+);

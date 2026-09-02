@@ -246,3 +246,72 @@ export const TRAINING = [                       // MOCK — every entry below
   { name: 'Level 2 Allergen Awareness',                 body: 'Awarding body', year: '2025' },
   { name: 'Diploma in Culinary Arts',                   body: 'Culinary college, Ukraine', year: '2012' }
 ];
+
+/**
+ * The EatMe feed.
+ *
+ * Shaped like the response a live endpoint would return, so `/api/instagram`
+ * can replace it later without the front end changing. `lane` decides which of
+ * the two rows a frame runs in: the kitchen made it, the counter sold it.
+ *
+ * These are the brand's own photographs. Some show customers — if any face is
+ * not cleared for use, drop that entry.
+ */
+export const FEED = {
+  ok: true,
+  source: 'selection',
+
+  // Flip to true once /api/instagram exists. Until then the page makes no
+  // request at all: a fetch that is always going to 404 is not a fallback,
+  // it is a wasted round trip and a red line in the console.
+  live: false,
+  profile: {
+    handle: '@eatme_cv.ua',
+    url: 'https://www.instagram.com/eatme_cv.ua/',
+    bio: 'Healthy food, cooked daily · Chernivtsi',
+    followers: '1,092',
+    span: '2019 — 2024'                          // MOCK
+  },
+  lanes: [
+    { id: 'kitchen', label: 'From the kitchen' },
+    { id: 'counter', label: 'From the counter' }
+  ],
+  posts: [
+    // --- kitchen ------------------------------------------------------------
+    { slug: 'salmon-sourdough',    lane: 'kitchen', tag: 'salads',  caption: 'Salmon, sourdough croutons, quail egg' },
+    { slug: 'salmon-top',          lane: 'kitchen', tag: 'salads',  caption: 'The same bowl, from above' },
+    { slug: 'salmon-leaves',       lane: 'kitchen', tag: 'salads',  caption: 'Salmon over dressed leaves' },
+    { slug: 'mozzarella-apple',    lane: 'kitchen', tag: 'salads',  caption: 'Mozzarella, apple, rocket, walnut' },
+    { slug: 'beetroot-goat-cheese',lane: 'kitchen', tag: 'salads',  caption: 'Roast beetroot, goat cheese, walnut, pomegranate' },
+    { slug: 'prawn-quail',         lane: 'kitchen', tag: 'salads',  caption: 'Prawn, avocado, quail egg, toasted sesame' },
+    { slug: 'salmon-citrus',       lane: 'kitchen', tag: 'fish',    caption: 'Seared salmon, citrus butter, herbs' },
+    { slug: 'mackerel-broccoli',   lane: 'kitchen', tag: 'fish',    caption: 'Grilled mackerel, tenderstem broccoli' },
+    { slug: 'grilled-veg-closeup', lane: 'kitchen', tag: 'grill',   caption: 'Grilled vegetables on salsa verde' },
+    { slug: 'skewers-peppers',     lane: 'kitchen', tag: 'grill',   caption: 'Paprika chicken skewers, grilled peppers' },
+    { slug: 'sesame-beef',         lane: 'kitchen', tag: 'mains',   caption: 'Sesame beef, teriyaki, micro herbs' },
+    { slug: 'pumpkin-veloute',     lane: 'kitchen', tag: 'soup',    caption: 'Pumpkin velouté, toasted sesame' },
+    { slug: 'pumpkin-soup',        lane: 'kitchen', tag: 'soup',    caption: 'Pumpkin soup, chilli oil, cress' },
+    { slug: 'herb-rice',           lane: 'kitchen', tag: 'sides',   caption: 'Herb rice, spring onion' },
+    { slug: 'bulgur-peas',         lane: 'kitchen', tag: 'sides',   caption: 'Bulgur, peas, sweetcorn, carrot' },
+    { slug: 'rice-corn',           lane: 'kitchen', tag: 'sides',   caption: 'Rice with sweetcorn and herbs' },
+    { slug: 'syrniki-mango',       lane: 'kitchen', tag: 'pastry',  caption: 'Syrniki with mango and almond' },
+    { slug: 'chia-mango',          lane: 'kitchen', tag: 'pastry',  caption: 'Chia pudding, mango purée, almond' },
+    { slug: 'banana-kiwi',         lane: 'kitchen', tag: 'pastry',  caption: 'Banana and kiwi in vanilla cream' },
+    { slug: 'porridge-berries',    lane: 'kitchen', tag: 'pastry',  caption: 'Porridge, kiwi, blackberry, raspberry' },
+
+    // --- counter ------------------------------------------------------------
+    { slug: 'three-juices',        lane: 'counter', tag: 'own label', caption: 'Cold-pressed: cacao, green, mango' },
+    { slug: 'apple-juice',         lane: 'counter', tag: 'own label', caption: 'Apple and ginger, pressed this morning' },
+    { slug: 'packed-flatlay',      lane: 'counter', tag: 'packing',   caption: 'Three meals and a juice, packed for the day' },
+    { slug: 'delivery-bag',        lane: 'counter', tag: 'delivery',  caption: 'One order, ready to leave' },
+    { slug: 'syrniki-box',         lane: 'counter', tag: 'packing',   caption: 'Syrniki travel better than you would think' },
+    { slug: 'customer-bowl',       lane: 'counter', tag: 'guests',    caption: 'Lunch, straight out of the box' },
+    { slug: 'desk-lunch',          lane: 'counter', tag: 'guests',    caption: 'Desk lunch, no washing up' },
+    { slug: 'bowl-book',           lane: 'counter', tag: 'guests',    caption: 'A Greek bowl and a long read' },
+    { slug: 'bed-flatlay',         lane: 'counter', tag: 'delivery',  caption: 'Breakfast that arrives' },
+    { slug: 'bed-bag',             lane: 'counter', tag: 'delivery',  caption: 'Saturday, delivered' },
+    { slug: 'porridge-hands',      lane: 'counter', tag: 'guests',    caption: 'Porridge, still warm' },
+    { slug: 'eating-cup',          lane: 'counter', tag: 'guests',    caption: 'The cup is the plate' },
+    { slug: 'street-customer',     lane: 'counter', tag: 'guests',    caption: 'Collected at the counter' }
+  ]
+};
