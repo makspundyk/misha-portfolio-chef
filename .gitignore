@@ -10,3 +10,6 @@ node_modules/
 # Camera originals. 5-18 MB each; the deployable copies live in public/assets.
 assets/img/src/
 assets/img/feed-src/
+
+# Local editor and assistant settings
+.claude/
