@@ -92,10 +92,9 @@ Everything tagged `// MOCK` in `public/src/js/data.js` is a plausible-looking
 placeholder, not a fact. Dish names and descriptions were written from the
 photographs and are real; check the ingredient lists read the way you cook.
 
-- **`CHEF.name`** — currently *Mykhailo Savchuk*, invented.
 - **`CHEF.rightToWork`** — the single line a UK employer reads first. Word it
   exactly as your status actually stands.
-- **`CHEF.email`, `CHEF.phone`, `CHEF.seeking`, `CHEF.available`, `CHEF.english`**
+- **`CHEF.seeking`, `CHEF.available`** — email, phone and English level are now real.
 - **`NUMBERS`** — years, covers, dishes, brigade size.
 - **`HISTORY`** — four roles with placeholder venue names, dates and achievements.
 - **`HOUSE.years` and `HOUSE.facts`** — the EatMe figures.

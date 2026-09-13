@@ -6,7 +6,7 @@
  * script-src 'self', which is what stops an injected <script> from running.
  */
 
-import { CHEF, NUMBERS, HISTORY, DISHES, COURSES, HOUSE, FEED, SKILLS, TRAINING } from './data.js';
+import { CHEF, HISTORY, DISHES, SETS, HOUSE, FEED } from './data.js';
 
 const $  = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
@@ -44,18 +44,11 @@ for (const node of $$('[data-fill]')) {
 
 $('[data-fill-intro]').append(...CHEF.intro.map((text) => el('p', { textContent: text })));
 
-$('[data-fill-numbers]').append(
-  ...NUMBERS.map(({ value, label }) =>
-    el('li', {}, [el('b', { textContent: value }), el('span', { textContent: label })])
-  )
-);
-
 /* ------------------------------------------------------------------ history */
 
 $('[data-fill-history]').append(
   ...HISTORY.map((job) =>
     el('li', { }, [
-      el('span', { className: 'history__course', textContent: job.course }),
       el('div', {}, [
         el('h3', { className: 'history__role' }, [
           `${job.role}, `,
@@ -75,9 +68,8 @@ $('[data-fill-history]').append(
 
 /* --------------------------------------------------------------------- menu */
 
-const menuList   = $('[data-fill-menu]');
-const courseBar  = $('[data-fill-courses]');
-let   visible    = DISHES;
+const menuList = $('[data-fill-menu]');
+let   visible  = DISHES;
 
 const dishCard = (dish, index) => {
   const img = el('img', {
@@ -114,30 +106,75 @@ const renderMenu = (course) => {
   menuList.replaceChildren(
     ...(visible.length
       ? visible.map(dishCard)
-      : [el('p', { className: 'menu__empty', textContent: 'Nothing on this course yet.' })])
+      : [el('p', { className: 'menu__empty', textContent: 'Nothing here yet.' })])
   );
   observeReveals(menuList);
 };
 
-courseBar.append(
-  ...COURSES.map(({ id, label }) => {
-    const btn = el('button', {
-      type: 'button',
-      className: 'course-btn',
-      textContent: label,
-      role: 'tab'
+renderMenu('all');
+
+/* --------------------------------------------------------------------- sets */
+
+/* The weekly sets, told the way the stories told them: a circle a day, and the
+   whole card behind it. */
+const setsList = $('[data-fill-sets]');
+const setBox   = $('#setbox');
+const setCard  = $('#setcard');
+let   setIndex = 0;
+
+function paintSet() {
+  const set = SETS[setIndex];
+  if (!set) return;
+
+  const photo = el('img', {
+    className: 'setcard__photo', src: set.photo, alt: set.day, decoding: 'async'
+  });
+  photo.style.objectPosition = set.focus;
+
+  setCard.replaceChildren(
+    el('div', { className: 'setcard__text' }, [
+      el('p', { className: 'setcard__day', textContent: set.day }),
+      el('ul', { className: 'setcard__meals' },
+        set.meals.map(([label, items]) =>
+          el('li', {}, [
+            el('span', { className: 'setcard__label', textContent: label }),
+            el('ul', {}, items.map((item) => el('li', { textContent: item })))
+          ]))),
+      el('p', { className: 'setcard__macros', textContent: set.macros })
+    ]),
+    photo
+  );
+}
+
+const stepSet = (delta) => {
+  setIndex = (setIndex + delta + SETS.length) % SETS.length;
+  paintSet();
+};
+
+setsList.append(
+  ...SETS.map((set, index) => {
+    const thumb = el('img', { src: set.thumb, alt: '', loading: 'lazy', decoding: 'async' });
+    thumb.style.objectPosition = set.focus;
+
+    const button = el('button', { type: 'button', className: 'set' }, [
+      el('span', { className: 'set__ring' }, thumb),
+      el('span', { className: 'set__day', textContent: set.day })
+    ]);
+    button.addEventListener('click', () => {
+      setIndex = index;
+      paintSet();
+      if (!setBox.open) setBox.showModal();
     });
-    btn.setAttribute('aria-selected', String(id === 'all'));
-    btn.addEventListener('click', () => {
-      $$('.course-btn', courseBar).forEach((b) => b.setAttribute('aria-selected', 'false'));
-      btn.setAttribute('aria-selected', 'true');
-      renderMenu(id);
-    });
-    return btn;
+    return el('li', {}, button);
   })
 );
 
-renderMenu('all');
+$('[data-set-close]').addEventListener('click', () => setBox.close());
+$('[data-set-prev]').addEventListener('click', () => stepSet(-1));
+$('[data-set-next]').addEventListener('click', () => stepSet(1));
+setBox.addEventListener('click', (event) => {
+  if (event.target === setBox) setBox.close();
+});
 
 /* ------------------------------------------------------------------- viewer */
 
@@ -166,16 +203,19 @@ const dishFrame = (dish) => ({
   images: TWO_SHOTS.has(dish.slug)
     ? [`/assets/img/menu/${dish.slug}-full.jpg`, `/assets/img/menu/${dish.slug}-alt.jpg`]
     : [`/assets/img/menu/${dish.slug}-full.jpg`],
+  alt: dish.name,
   title: dish.name,
   sub: dish.desc,
-  tag: `${dish.section} section`
+  tag: dish.section
 });
 
+// The feed frames open as photographs only: no caption, no tag.
 const postFrame = (post) => ({
   images: [`/assets/img/feed/${post.slug}-full.jpg`],
-  title: post.caption,
+  alt: post.caption,
+  title: '',
   sub: '',
-  tag: post.tag
+  tag: ''
 });
 
 let frames = [];
@@ -193,11 +233,11 @@ function paintFrame() {
   if (!frame) return;
 
   lbImgA.src = frame.images[0];
-  lbImgA.alt = frame.title;
+  lbImgA.alt = frame.alt ?? frame.title;
 
   if (frame.images[1]) {
     lbImgB.src = frame.images[1];
-    lbImgB.alt = `${frame.title}, second angle`;
+    lbImgB.alt = `${frame.alt ?? frame.title}, second angle`;
     lbImgB.hidden = false;
   } else {
     lbImgB.hidden = true;
@@ -205,9 +245,14 @@ function paintFrame() {
   }
 
   lbName.textContent = frame.title;
+  lbName.hidden = frame.title === '';
   lbDesc.textContent = frame.sub;
   lbDesc.hidden = frame.sub === '';
   lbSect.textContent = frame.tag;
+  lbSect.hidden = frame.tag === '';
+
+  // With nothing to say, the caption bar itself has no reason to be there.
+  lbName.parentElement.hidden = !frame.title && !frame.sub && !frame.tag;
 }
 
 const step = (delta) => {
@@ -252,14 +297,13 @@ $('[data-fill-house-facts]').append(
 
 $('[data-fill-bottles]').append(
   ...HOUSE.bottles.map(({ file, name }) =>
-    el('figure', { className: 'bottle' }, [
+    el('figure', { className: 'bottle' },
       el('img', {
         src: `/assets/img/brand/${file}`,
-        alt: `EatMe cold-pressed ${name.toLowerCase()}`,
+        alt: `EatMe — ${name.toLowerCase()}`,
         loading: 'lazy', decoding: 'async', width: 344, height: 900
-      }),
-      el('figcaption', { textContent: name })
-    ])
+      })
+    )
   )
 );
 
@@ -288,13 +332,7 @@ const tile = (post, index, list) => {
   });
   img.dataset.src = `/assets/img/feed/${post.slug}.jpg`;
 
-  const button = el('button', { type: 'button', className: 'tile' }, [
-    img,
-    el('span', { className: 'tile__cap' }, [
-      el('span', { className: 'tile__tag', textContent: post.tag }),
-      el('span', { className: 'tile__text', textContent: post.caption })
-    ])
-  ]);
+  const button = el('button', { type: 'button', className: 'tile' }, img);
   button.addEventListener('click', () => openViewer(list.map(postFrame), index));
   return button;
 };
@@ -385,14 +423,6 @@ function paintProfile() {
     if (key === 'handle') {
       node.href = FEED.profile.url;
       node.textContent = FEED.profile.handle;
-    } else if (key === 'follow') {
-      node.href = FEED.profile.url;
-    } else if (key === 'stats') {
-      node.textContent = `${FEED.profile.followers} followers · ${FEED.profile.span}`;
-    } else if (key === 'source') {
-      node.textContent = FEED.source === 'live'
-        ? 'Live from the account.'
-        : 'A selection from the EatMe feed, not a live embed.';
     }
   }
 }
@@ -400,36 +430,14 @@ function paintProfile() {
 paintProfile();
 refreshFeed();
 
-/* ------------------------------------------------------------ skills, certs */
-
-$('[data-fill-skills]').append(
-  ...SKILLS.map(({ title, items }) =>
-    el('div', { className: 'skill' }, [
-      el('h3', { className: 'skill__title', textContent: title }),
-      el('ul', {}, items.map((item) => el('li', { textContent: item })))
-    ])
-  )
-);
-
-$('[data-fill-training]').append(
-  ...TRAINING.map(({ name, body, year }) =>
-    el('li', {}, [
-      el('span', { className: 'training__name', textContent: name }),
-      el('span', { className: 'training__leader', ariaHidden: 'true' }),
-      el('span', { className: 'training__body', textContent: body }),
-      el('span', { className: 'training__year', textContent: year })
-    ])
-  )
-);
-
 /* ------------------------------------------------------------------ contact */
 
 $('[data-fill-contact]').append(
   ...[
     ['Email',     CHEF.email,          `mailto:${CHEF.email}`],
-    ['Telephone', CHEF.phone,          `tel:${CHEF.phone.replace(/\s/g, '')}`],
+    ['Phone',     CHEF.phone,          `tel:${CHEF.phone.replace(/\s/g, '')}`],
     ['Instagram', CHEF.instagramLabel, CHEF.instagram],
-    ['Based',     CHEF.seeking,        null]
+    ['Based in',  CHEF.seeking,        null]
   ].map(([key, value, href]) =>
     el('li', {}, [
       el('span', { className: 'contact__key', textContent: key }),

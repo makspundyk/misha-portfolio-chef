@@ -7,12 +7,12 @@
 
 import { readdir, access, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT   = join(fileURLToPath(new URL('..', import.meta.url)));
 const PUBLIC = join(ROOT, 'public');
 
-const { DISHES, HOUSE, FEED } = await import(join(PUBLIC, 'src/js/data.js'));
+const { DISHES, HOUSE, FEED } = await import(pathToFileURL(join(PUBLIC, 'src/js/data.js')).href);
 
 const exists = async (path) => {
   try { await access(path); return true; } catch { return false; }

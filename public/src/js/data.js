@@ -1,102 +1,56 @@
 /**
  * Every fact on the page lives here. Change a value, reload, done.
  *
- * Values tagged // MOCK are placeholders written to look plausible for a UK
- * kitchen job application. Replace all of them before sending this to anyone.
- * Dish names and descriptions are written from the photographs and are safe to
- * keep, though the chef should check the ingredient lists read the way he cooks.
+ * Values tagged // MOCK are placeholders. Replace all of them before sending
+ * this to anyone.
  */
 
 export const CHEF = {
-  name: 'Mykhailo Savchuk',                    // MOCK
-  role: 'Head Chef · Chef Patron',             // MOCK
-  strapline: 'Modern European cooking, built around vegetables, fish and precision.',
+  name: 'Mykhailo Sanduliak',
+  role: 'Cook · healthy-food menu creator',
+  strapline: 'Healthy food that looks after your health and your weight.',
   from: 'Chernivtsi, Ukraine',
   seeking: 'London, UK',                       // MOCK
   available: 'Available from October 2026',    // MOCK
 
   // UK employers look for this first. Get the wording exactly right.
-  rightToWork: 'Full right to work in the UK — no sponsorship required.', // MOCK
-  english: 'English B2 · Ukrainian and Russian native',                   // MOCK
+  rightToWork: 'Right to work in the UK — no sponsorship required.',
+  english: 'English B1 · Ukrainian and Russian (native)',
 
-  email: 'chef@example.com',                   // MOCK
-  phone: '+44 7000 000000',                    // MOCK
+  email: 'mykhailos22@gmail.com',
+  phone: '+380 95 698 7519',
   instagram: 'https://www.instagram.com/eatme_cv.ua/',
   instagramLabel: '@eatme_cv.ua',
 
   intro: [
-    'I cook food that people eat every day and still remember. Twelve years on the line taught me the two things a kitchen is actually judged on: the same plate leaving the pass at 7pm and at 11pm, and a gross profit that survives a bad week.',
-    'My own kitchen was a healthy-food brand in Chernivtsi — menu, costing, hiring, packaging, delivery. I built it from an empty room to three hundred meals a day. I am now looking for a section or a head chef role in London where that appetite has somewhere to go.'
+    'You are what you eat. To me that is not just a nice phrase but a way of working: if a dish becomes part of someone’s day, it should build that person up, not simply stop them being hungry.',
+    'Cooking is like meditation for me. At the stove there are only my hands, the ingredients and time, and everything else goes quiet. That is where my menu grew from: every dish was counted down to the last calorie, yet it was never made for the numbers. It was made so that whoever ate it felt better afterwards.'
   ]
 };
-
-/** The numbers a head chef is hired on. All MOCK — replace with real figures. */
-export const NUMBERS = [
-  { value: '12',   label: 'years in professional kitchens' },  // MOCK
-  { value: '320',  label: 'meals a day at peak service' },     // MOCK
-  { value: '60+',  label: 'dishes developed and costed' },     // MOCK
-  { value: '9',    label: 'chefs in the brigade I ran' }       // MOCK
-];
 
 /**
  * Career, most recent first. Rendered as courses because the order carries the
  * story: each role is what the one before it made possible.
  */
-export const HISTORY = [                        // MOCK — every entry below
+export const HISTORY = [
   {
-    course: 'I',
-    role: 'Chef Patron',
+    role: 'Founder and Cook',
     venue: 'EatMe',
-    place: 'Chernivtsi, UA',
-    years: '2019 — 2024',
+    place: 'Chernivtsi, Ukraine',
+    years: '',
     kind: 'Own kitchen · healthy food and delivery',
     notes: [
-      'Founded the brand and ran the kitchen: menu, recipes, costing, purchasing, rota, hiring.',
-      'Grew from 40 to 320 meals a day across delivery, collection and a retail counter.',
-      'Held food cost at 31% while sourcing from local growers.',
-      'Developed a cold-pressed juice and smoothie range sold under our own label.'
-    ]
-  },
-  {
-    course: 'II',
-    role: 'Head Chef',
-    venue: 'Restaurant name',
-    place: 'Chernivtsi, UA',
-    years: '2016 — 2019',
-    kind: '120 covers · à la carte and banqueting',
-    notes: [
-      'Ran a brigade of seven across larder, grill and pastry.',
-      'Rewrote the menu twice a year; introduced a seasonal fish list.',
-      'Took the kitchen through its first full HACCP documentation.'
-    ]
-  },
-  {
-    course: 'III',
-    role: 'Sous Chef',
-    venue: 'Hotel name',
-    place: 'Chernivtsi, UA',
-    years: '2014 — 2016',
-    kind: 'Hotel restaurant · breakfast, à la carte, events',
-    notes: [
-      'Breakfast service to 200 guests and banqueting to 300.',
-      'Second in charge of ordering, stock and section training.'
-    ]
-  },
-  {
-    course: 'IV',
-    role: 'Chef de Partie',
-    venue: 'Restaurant name',
-    place: 'Lviv, UA',
-    years: '2012 — 2014',
-    kind: 'Larder and grill sections',
-    notes: [
-      'Learned the sections properly: mise en place, prep lists, and speed.'
+      'Created a set menu of five dishes to cover a whole day, selling around fifty sets a day.',
+      'Calculated the protein, fat, carbohydrates and calories for every dish myself, with separate portions for women and men.',
+      'Sold individual lunches in similar numbers — around fifty portions a day.',
+      'Worked in a team of four covering the kitchen, packing and delivery.',
+      'Handled the menu, recipes, costing and purchasing.'
     ]
   }
 ];
 
 /**
- * Signature dishes. Photographed by the chef; two angles each where available.
+ * Signature dishes, photographed by the chef; two angles each where available.
  * `section` is the kitchen section the dish belongs to — it says something true
  * about where the work happened, which a decorative tag would not.
  * `focus` sets the crop centre inside the round plate.
@@ -105,147 +59,200 @@ export const DISHES = [
   // ---- Starters ------------------------------------------------------------
   { slug: 'greek-salad', course: 'starters', section: 'Larder',
     name: 'Greek Salad',
-    desc: 'Feta, vine tomato, cucumber, kalamata olive, red onion, oregano, lemon' },
+    desc: 'Feta, tomato, cucumber, bell pepper, red onion, olives, microgreens' },
   { slug: 'mozzarella-salad', course: 'starters', section: 'Larder',
-    name: 'Mozzarella & Frisée',
-    desc: 'Bocconcini, cherry tomato, radicchio, cucumber, basil oil' },
+    name: 'Mozzarella Salad',
+    desc: 'Mozzarella, cherry tomatoes, red pepper, olives, salad leaves, pesto' },
   { slug: 'asparagus-salad', course: 'starters', section: 'Larder',
-    name: 'Asparagus & Green Olive',
-    desc: 'Green asparagus, cucumber, radicchio, olive, herb pesto' },
+    name: 'Green Salad with Pesto',
+    desc: 'Cucumber, avocado, celery, green olives, pesto, microgreens' },
   { slug: 'chicken-parmesan-salad', course: 'starters', section: 'Larder',
-    name: 'Chicken & Parmesan',
-    desc: 'Roast chicken, aged parmesan, radicchio, tarragon, soft dressing' },
+    name: 'Caesar Salad',
+    desc: 'Chicken breast, parmesan, quail egg, cherry tomatoes, salad leaves, homemade mayonnaise' },
   { slug: 'prawn-quail-salad', course: 'starters', section: 'Larder',
-    name: 'King Prawn & Quail Egg',
-    desc: 'Prawn, avocado, quail egg, leaves, toasted sesame, green herb dressing',
+    name: 'Prawn and Quail Egg Salad',
+    desc: 'Prawns, avocado, quail egg, cherry tomatoes, mixed leaves, sesame, pesto dressing',
     focus: '46% 46%' },
   { slug: 'salmon-mussel-salad', course: 'starters', section: 'Larder',
-    name: 'Salmon, Mussel & Sourdough',
-    desc: 'Cured salmon, mussels, quail egg, tomato, croutons, dill vinaigrette' },
+    name: 'Salmon Salad',
+    desc: 'Salmon, mussels, quail egg, tomato, mixed leaves' },
   { slug: 'grilled-vegetables', course: 'starters', section: 'Grill',
-    name: 'Grilled Vegetables, Salsa Verde',
-    desc: 'Courgette, aubergine, red pepper, tomato, caper, salsa verde' },
-  { slug: 'green-veloute', course: 'starters', section: 'Hot line',
-    name: 'Green Vegetable Velouté',
-    desc: 'Broccoli, spinach, leek, olive oil, micro herbs' },
+    name: 'Roasted Vegetables',
+    desc: 'Aubergine, courgette, red pepper, mushrooms, olive oil, spices' },
+  { slug: 'green-veloute', course: 'starters', section: 'Hot section',
+    name: 'Broccoli Soup',
+    desc: 'Broccoli, garlic, olive oil, microgreens' },
 
   // ---- Brunch --------------------------------------------------------------
-  { slug: 'omelette-rolls', course: 'brunch', section: 'Hot line',
-    name: 'Omelette Rolls',
-    desc: 'Rolled herb omelette, ricotta, avocado, spring onion, alfalfa' },
-  { slug: 'green-fritters', course: 'brunch', section: 'Hot line',
-    name: 'Broccoli & Courgette Fritters',
-    desc: 'Green vegetable fritters, cashew cream, pea shoots, radish' },
-  { slug: 'chickpea-flatbread', course: 'brunch', section: 'Hot line',
-    name: 'Chickpea Flatbread',
-    desc: 'Folded chickpea pancake, leaves, avocado, radicchio, soft cheese' },
+  { slug: 'omelette-rolls', course: 'brunch', section: 'Hot section',
+    name: 'Prawn Pancakes',
+    desc: 'Oat-flour pancakes, prawns, feta, avocado' },
+  { slug: 'green-fritters', course: 'brunch', section: 'Hot section',
+    name: 'Spinach Syrniki',
+    desc: 'Curd cheese, spinach, egg' },
   { slug: 'rye-club', course: 'brunch', section: 'Larder',
-    name: 'Rye Club Sandwich',
-    desc: 'Toasted rye, avocado, prawn, radicchio, alfalfa, lemon mayonnaise' },
-  { slug: 'veg-muffins', course: 'brunch', section: 'Hot line',
-    name: 'Vegetable & Cheese Muffins',
-    desc: 'Baked root vegetable muffins, garlic aioli, rocket' },
+    name: 'Prawn Sandwich',
+    desc: 'Bread, salad leaves, prawns, avocado, feta' },
 
   // ---- Mains ---------------------------------------------------------------
-  { slug: 'chicken-roulade', course: 'mains', section: 'Hot line',
-    name: 'Chicken Roulade, Spinach Pesto',
-    desc: 'Rolled chicken breast, spinach and pine nut pesto, basil',
+  { slug: 'chicken-roulade', course: 'mains', section: 'Hot section',
+    name: 'Chicken Roulade',
+    desc: 'Chicken fillet, parmesan, almonds, mint, onion, olive oil',
     focus: '46% 50%' },
-  { slug: 'chicken-cutlets', course: 'mains', section: 'Hot line',
-    name: 'Chicken Cutlets, Smoked Tomato',
-    desc: 'Chicken cutlets, smoked tomato sauce, radish, micro herbs' },
+  { slug: 'chicken-cutlets', course: 'mains', section: 'Hot section',
+    name: 'Chicken Patties with Tomato Sauce',
+    desc: '' },
   { slug: 'chicken-skewers', course: 'mains', section: 'Grill',
-    name: 'Paprika Chicken Skewers',
-    desc: 'Marinated chicken, grilled pepper and aubergine, herb oil' },
-  { slug: 'crumbed-chicken', course: 'mains', section: 'Hot line',
-    name: 'Crumbed Chicken, Beetroot',
-    desc: 'Panko chicken, roast beetroot purée, garlic aioli, cress',
+    name: 'Chicken Skewers',
+    desc: 'Marinated chicken breast, roasted aubergine, courgette, pepper' },
+  { slug: 'crumbed-chicken', course: 'mains', section: 'Hot section',
+    name: 'Chicken Nuggets',
+    desc: 'Chicken fillet in a coconut crumb, red wine and berry sauce',
     focus: '44% 50%' },
-  { slug: 'bulgur', course: 'mains', section: 'Hot line',
-    name: 'Bulgur, Green Bean & Carrot',
-    desc: 'Bulgur pilaf, green beans, carrot, olive oil, parsley',
+  { slug: 'bulgur', course: 'mains', section: 'Hot section',
+    name: 'Bulgur with Vegetables',
+    desc: 'Bulgur, green beans, peas, carrot, sweetcorn',
     focus: '46% 50%' },
 
   // ---- Fish ----------------------------------------------------------------
-  { slug: 'hake-sweet-potato', course: 'fish', section: 'Fish',
-    name: 'Hake, Sweet Potato Purée',
-    desc: 'Pan-seared hake, sweet potato purée, toasted spice, micro cress',
-    focus: '50% 52%' },
   { slug: 'fish-roulade', course: 'fish', section: 'Fish',
-    name: 'Fish Roulade, Saffron Velouté',
-    desc: 'Stuffed white fish roulade, saffron velouté, potato, broccoli' },
+    name: 'Fish Roulade',
+    desc: '' },
   { slug: 'mackerel', course: 'fish', section: 'Grill',
     name: 'Grilled Mackerel',
-    desc: 'Mackerel fillet, tenderstem broccoli, tomato, rocket',
+    desc: 'Mackerel fillet, broccoli, tomato, rocket',
     focus: '46% 55%' },
 
   // ---- Pastry --------------------------------------------------------------
   { slug: 'syrniki', course: 'pastry', section: 'Pastry',
-    name: 'Curd Cheese Pancakes',
-    desc: 'Syrniki, dark chocolate, toasted almond, mint' },
+    name: 'Syrniki',
+    desc: 'Curd cheese pancakes, honey, toasted almonds, mint' },
   { slug: 'banana-crepes', course: 'pastry', section: 'Pastry',
-    name: 'Banana Crêpes',
-    desc: 'Thin crêpes, banana, almond, dark chocolate, mint' },
+    name: 'Banana Pancakes',
+    desc: 'Thin pancakes, banana, almonds, dark chocolate, mint' },
   { slug: 'poppy-crepe-rolls', course: 'pastry', section: 'Pastry',
-    name: 'Poppy Seed Crêpe Rolls',
-    desc: 'Crêpe rolls, poppy seed and chocolate, mandarin, almond' }
+    name: 'Poppy Seed Pancake Rolls',
+    desc: 'Pancake rolls, poppy seeds with chocolate, mandarin, almonds' }
 ];
 
-export const COURSES = [
-  { id: 'all',      label: 'Full menu' },
-  { id: 'starters', label: 'Starters' },
-  { id: 'brunch',   label: 'Brunch' },
-  { id: 'mains',    label: 'Mains' },
-  { id: 'fish',     label: 'Fish' },
-  { id: 'pastry',   label: 'Pastry' }
+/**
+ * The weekly sets, the way they ran in the EatMe stories: one card a day,
+ * five meals in it, transcribed from the "Нове меню" story cards. `photo` is
+ * the plate from that day's card; `focus` is its crop centre.
+ */
+export const SETS = [
+  {
+    day: 'Monday',
+    photo: '/assets/img/feed/beetroot-goat-cheese-full.jpg',
+    thumb: '/assets/img/feed/beetroot-goat-cheese.jpg',
+    focus: '62% 55%',
+    macros: 'Protein 120 g · Fat 75 g · Carbs 100 g · 1,500 kcal',
+    meals: [
+      ['Meal 1', ['Chia pudding']],
+      ['Meal 2', ['Beetroot, feta and walnut salad']],
+      ['Meal 3', ['Hake', 'Seafood soup']],
+      ['Meal 4', ['Mozzarella salad', 'Coconut chicken nuggets']],
+      ['Meal 5', ['Roasted vegetables']]
+    ]
+  },
+  {
+    day: 'Tuesday',
+    photo: '/assets/img/menu/prawn-quail-salad-full.jpg',
+    thumb: '/assets/img/menu/prawn-quail-salad.jpg',
+    focus: '55% 50%',
+    macros: 'Protein 150 g · Fat 90 g · Carbs 140 g · 1,800 kcal',
+    meals: [
+      ['Meal 1', ['Mango fruit bowl']],
+      ['Meal 2', ['Chicken salad']],
+      ['Meal 3', ['Blended vegetable soup', 'Pollock']],
+      ['Meal 4', ['Prawn salad', 'Chicken roulade']],
+      ['Meal 5', ['Spinach syrniki']]
+    ]
+  },
+  {
+    day: 'Wednesday',
+    photo: '/assets/img/feed/porridge-berries-full.jpg',
+    thumb: '/assets/img/feed/porridge-berries.jpg',
+    focus: '50% 52%',
+    macros: 'Protein 110 g · Fat 85 g · Carbs 150 g · 1,900 kcal',
+    meals: [
+      ['Meal 1', ['Kiwi fruit bowl']],
+      ['Meal 2', ['Apple salad']],
+      ['Meal 3', ['Salmon', 'Couscous']],
+      ['Meal 4', ['Green salad']],
+      ['Meal 5', ['Waffles with honey']]
+    ]
+  },
+  {
+    day: 'Thursday',
+    photo: '/assets/img/menu/mackerel-full.jpg',
+    thumb: '/assets/img/menu/mackerel.jpg',
+    focus: '45% 50%',
+    macros: 'Protein 90 g · Fat 80 g · Carbs 160 g · 1,800 kcal',
+    meals: [
+      ['Meal 1', ['Pancakes with maple syrup']],
+      ['Meal 2', ['Greek salad']],
+      ['Meal 3', ['Carrot soup', 'Beetroot, feta and walnut salad']],
+      ['Meal 4', ['Hake']],
+      ['Meal 5', ['Poppy seed pancakes']]
+    ]
+  },
+  {
+    day: 'Friday',
+    photo: '/assets/img/menu/chicken-parmesan-salad-full.jpg',
+    thumb: '/assets/img/menu/chicken-parmesan-salad.jpg',
+    focus: '50% 52%',
+    macros: 'Protein 110 g · Fat 80 g · Carbs 120 g · 1,900 kcal',
+    meals: [
+      ['Meal 1', ['Syrniki']],
+      ['Meal 2', ['Chicken salad']],
+      ['Meal 3', ['Chicken meatballs']],
+      ['Meal 4', ['Mozzarella salad']],
+      ['Meal 5', ['Pancakes with avocado and prawns']]
+    ]
+  },
+  {
+    day: 'Saturday',
+    photo: '/assets/img/menu/salmon-mussel-salad-full.jpg',
+    thumb: '/assets/img/menu/salmon-mussel-salad.jpg',
+    focus: '50% 52%',
+    macros: 'Protein 120 g · Fat 75 g · Carbs 140 g · 1,800 kcal',
+    meals: [
+      ['Meal 1', ['Sandwich']],
+      ['Meal 2', ['Salmon salad']],
+      ['Meal 3', ['Blended vegetable soup', 'Sesame-crusted pork']],
+      ['Meal 4', ['Prawn salad']],
+      ['Meal 5', ['Waffles with berries']]
+    ]
+  }
 ];
 
 /** The own-brand case study. */
 export const HOUSE = {
   name: 'EatMe',
   place: 'Chernivtsi, Ukraine',
-  years: '2019 — 2024',                        // MOCK
-  role: 'Founder and Chef Patron',
+  years: '',
+  role: 'Founder · menu and kitchen',
   instagram: 'https://www.instagram.com/eatme_cv.ua/',
   instagramLabel: '@eatme_cv.ua',
   shopLabel: '@eatme_shop1',
   body: [
-    'EatMe was a healthy-food kitchen: balanced meals cooked daily, packed, and delivered across the city, with a retail counter and our own cold-pressed juice line.',
-    'I was the chef and the owner, which means I wrote the menu and also signed the invoices. Every dish had to plate beautifully, travel forty minutes in a box, and still make its margin. That constraint made me a better cook than any tasting menu would have.'
+    'EatMe was a healthy-food kitchen: balanced meals cooked every day, packed and delivered across the city, plus a retail counter and our own line of cold-pressed juices.',
+    'I was both the cook and the owner, which meant I wrote the menu and signed the invoices too. Every dish had to look good on the plate, survive forty minutes in a box and still make a profit.'
   ],
   facts: [
-    ['Daily output',   '320 meals'],            // MOCK
-    ['Menu',           '60 dishes on rotation'],// MOCK
-    ['Team',           '9 chefs and packers'],  // MOCK
-    ['Own label',      'Cold-pressed juices']
+    ['Daily output', '350 portions'],
+    ['Customers',    '150 people a day'],
+    ['Team',         '4 people'],
+    ['Own brand',    'EatMe']
   ],
   bottles: [
     { file: 'juice-green.jpg',  name: 'Green' },
     { file: 'juice-verde.jpg',  name: 'Deep green' },
-    { file: 'juice-citrus.jpg', name: 'Mango & orange' },
-    { file: 'juice-cacao.jpg',  name: 'Cacao & nut' }
+    { file: 'juice-citrus.jpg', name: 'Mango and orange' },
+    { file: 'juice-cacao.jpg',  name: 'Cacao and nut' }
   ]
 };
-
-export const SKILLS = [
-  { title: 'Sections',
-    items: ['Larder', 'Hot line', 'Grill', 'Fish', 'Pastry', 'Pass'] },
-  { title: 'Running a kitchen',
-    items: ['Menu development', 'Recipe and dish costing', 'GP control', 'Ordering and stock',
-            'Supplier sourcing', 'Rota and labour cost', 'Training and section handover'] },
-  { title: 'Compliance',
-    items: ['HACCP documentation', 'Allergen control (Natasha’s Law)', 'Temperature and cleaning records',
-            'Due diligence for EHO visits'] },
-  { title: 'Kitchens I cook in',
-    items: ['Modern European', 'Mediterranean', 'Ukrainian', 'Healthy and meal-prep', 'High-volume delivery'] }
-];
-
-export const TRAINING = [                       // MOCK — every entry below
-  { name: 'Level 2 Food Safety & Hygiene for Catering', body: 'Awarding body', year: '2025' },
-  { name: 'Level 2 HACCP for Catering',                 body: 'Awarding body', year: '2025' },
-  { name: 'Level 2 Allergen Awareness',                 body: 'Awarding body', year: '2025' },
-  { name: 'Diploma in Culinary Arts',                   body: 'Culinary college, Ukraine', year: '2012' }
-];
 
 /**
  * The EatMe feed.
@@ -253,6 +260,7 @@ export const TRAINING = [                       // MOCK — every entry below
  * Shaped like the response a live endpoint would return, so `/api/instagram`
  * can replace it later without the front end changing. `lane` decides which of
  * the two rows a frame runs in: the kitchen made it, the counter sold it.
+ * Captions are no longer shown on the page; they remain as image alt text.
  *
  * These are the brand's own photographs. Some show customers — if any face is
  * not cleared for use, drop that entry.
@@ -268,9 +276,7 @@ export const FEED = {
   profile: {
     handle: '@eatme_cv.ua',
     url: 'https://www.instagram.com/eatme_cv.ua/',
-    bio: 'Healthy food, cooked daily · Chernivtsi',
-    followers: '1,092',
-    span: '2019 — 2024'                          // MOCK
+    bio: 'Healthy food, fresh every day · Chernivtsi'
   },
   lanes: [
     { id: 'kitchen', label: 'From the kitchen' },
@@ -278,40 +284,40 @@ export const FEED = {
   ],
   posts: [
     // --- kitchen ------------------------------------------------------------
-    { slug: 'salmon-sourdough',    lane: 'kitchen', tag: 'salads',  caption: 'Salmon, sourdough croutons, quail egg' },
-    { slug: 'salmon-top',          lane: 'kitchen', tag: 'salads',  caption: 'The same bowl, from above' },
-    { slug: 'salmon-leaves',       lane: 'kitchen', tag: 'salads',  caption: 'Salmon over dressed leaves' },
-    { slug: 'mozzarella-apple',    lane: 'kitchen', tag: 'salads',  caption: 'Mozzarella, apple, rocket, walnut' },
-    { slug: 'beetroot-goat-cheese',lane: 'kitchen', tag: 'salads',  caption: 'Roast beetroot, goat cheese, walnut, pomegranate' },
-    { slug: 'prawn-quail',         lane: 'kitchen', tag: 'salads',  caption: 'Prawn, avocado, quail egg, toasted sesame' },
-    { slug: 'salmon-citrus',       lane: 'kitchen', tag: 'fish',    caption: 'Seared salmon, citrus butter, herbs' },
-    { slug: 'mackerel-broccoli',   lane: 'kitchen', tag: 'fish',    caption: 'Grilled mackerel, tenderstem broccoli' },
-    { slug: 'grilled-veg-closeup', lane: 'kitchen', tag: 'grill',   caption: 'Grilled vegetables on salsa verde' },
-    { slug: 'skewers-peppers',     lane: 'kitchen', tag: 'grill',   caption: 'Paprika chicken skewers, grilled peppers' },
-    { slug: 'sesame-beef',         lane: 'kitchen', tag: 'mains',   caption: 'Sesame beef, teriyaki, micro herbs' },
-    { slug: 'pumpkin-veloute',     lane: 'kitchen', tag: 'soup',    caption: 'Pumpkin velouté, toasted sesame' },
-    { slug: 'pumpkin-soup',        lane: 'kitchen', tag: 'soup',    caption: 'Pumpkin soup, chilli oil, cress' },
-    { slug: 'herb-rice',           lane: 'kitchen', tag: 'sides',   caption: 'Herb rice, spring onion' },
-    { slug: 'bulgur-peas',         lane: 'kitchen', tag: 'sides',   caption: 'Bulgur, peas, sweetcorn, carrot' },
-    { slug: 'rice-corn',           lane: 'kitchen', tag: 'sides',   caption: 'Rice with sweetcorn and herbs' },
-    { slug: 'syrniki-mango',       lane: 'kitchen', tag: 'pastry',  caption: 'Syrniki with mango and almond' },
-    { slug: 'chia-mango',          lane: 'kitchen', tag: 'pastry',  caption: 'Chia pudding, mango purée, almond' },
-    { slug: 'banana-kiwi',         lane: 'kitchen', tag: 'pastry',  caption: 'Banana and kiwi in vanilla cream' },
-    { slug: 'porridge-berries',    lane: 'kitchen', tag: 'pastry',  caption: 'Porridge, kiwi, blackberry, raspberry' },
+    { slug: 'salmon-sourdough',    lane: 'kitchen', tag: 'salads',   caption: 'Salmon, wheat croutons and quail egg' },
+    { slug: 'salmon-top',          lane: 'kitchen', tag: 'salads',   caption: 'The same bowl from above' },
+    { slug: 'salmon-leaves',       lane: 'kitchen', tag: 'salads',   caption: 'Salmon on dressed leaves' },
+    { slug: 'mozzarella-apple',    lane: 'kitchen', tag: 'salads',   caption: 'Mozzarella, apple, rocket and walnuts' },
+    { slug: 'beetroot-goat-cheese',lane: 'kitchen', tag: 'salads',   caption: 'Roasted beetroot, goat cheese, walnuts and pomegranate' },
+    { slug: 'prawn-quail',         lane: 'kitchen', tag: 'salads',   caption: 'Prawns, avocado, quail egg and sesame' },
+    { slug: 'salmon-citrus',       lane: 'kitchen', tag: 'fish',     caption: 'Salmon with citrus butter and herbs' },
+    { slug: 'mackerel-broccoli',   lane: 'kitchen', tag: 'fish',     caption: 'Grilled mackerel with broccoli' },
+    { slug: 'grilled-veg-closeup', lane: 'kitchen', tag: 'grill',    caption: 'Roasted vegetables on a green sauce' },
+    { slug: 'skewers-peppers',     lane: 'kitchen', tag: 'grill',    caption: 'Chicken skewers with roasted peppers' },
+    { slug: 'sesame-beef',         lane: 'kitchen', tag: 'mains',    caption: 'Sesame beef with teriyaki' },
+    { slug: 'pumpkin-veloute',     lane: 'kitchen', tag: 'soups',    caption: 'Pumpkin soup with sesame' },
+    { slug: 'pumpkin-soup',        lane: 'kitchen', tag: 'soups',    caption: 'Pumpkin soup with chilli oil and cress' },
+    { slug: 'herb-rice',           lane: 'kitchen', tag: 'sides',    caption: 'Rice with herbs and spring onion' },
+    { slug: 'bulgur-peas',         lane: 'kitchen', tag: 'sides',    caption: 'Bulgur with peas, sweetcorn and carrot' },
+    { slug: 'rice-corn',           lane: 'kitchen', tag: 'sides',    caption: 'Rice with sweetcorn and herbs' },
+    { slug: 'syrniki-mango',       lane: 'kitchen', tag: 'desserts', caption: 'Syrniki with mango and almonds' },
+    { slug: 'chia-mango',          lane: 'kitchen', tag: 'desserts', caption: 'Chia pudding with mango purée and almonds' },
+    { slug: 'banana-kiwi',         lane: 'kitchen', tag: 'desserts', caption: 'Banana and kiwi in vanilla cream' },
+    { slug: 'porridge-berries',    lane: 'kitchen', tag: 'desserts', caption: 'Porridge with kiwi, blackberries and raspberries' },
 
     // --- counter ------------------------------------------------------------
-    { slug: 'three-juices',        lane: 'counter', tag: 'own label', caption: 'Cold-pressed: cacao, green, mango' },
-    { slug: 'apple-juice',         lane: 'counter', tag: 'own label', caption: 'Apple and ginger, pressed this morning' },
+    { slug: 'three-juices',        lane: 'counter', tag: 'own brand', caption: 'Cold-pressed juices: cacao, green and mango' },
+    { slug: 'apple-juice',         lane: 'counter', tag: 'own brand', caption: 'Apple and ginger, pressed this morning' },
     { slug: 'packed-flatlay',      lane: 'counter', tag: 'packing',   caption: 'Three meals and a juice, packed for the day' },
-    { slug: 'delivery-bag',        lane: 'counter', tag: 'delivery',  caption: 'One order, ready to leave' },
+    { slug: 'delivery-bag',        lane: 'counter', tag: 'delivery',  caption: 'One order, ready to go' },
     { slug: 'syrniki-box',         lane: 'counter', tag: 'packing',   caption: 'Syrniki travel better than you would think' },
-    { slug: 'customer-bowl',       lane: 'counter', tag: 'guests',    caption: 'Lunch, straight out of the box' },
-    { slug: 'desk-lunch',          lane: 'counter', tag: 'guests',    caption: 'Desk lunch, no washing up' },
-    { slug: 'bowl-book',           lane: 'counter', tag: 'guests',    caption: 'A Greek bowl and a long read' },
-    { slug: 'bed-flatlay',         lane: 'counter', tag: 'delivery',  caption: 'Breakfast that arrives' },
+    { slug: 'customer-bowl',       lane: 'counter', tag: 'customers', caption: 'Lunch straight out of the box' },
+    { slug: 'desk-lunch',          lane: 'counter', tag: 'customers', caption: 'Lunch at the desk, no washing-up' },
+    { slug: 'bowl-book',           lane: 'counter', tag: 'customers', caption: 'A Greek salad and a long read' },
+    { slug: 'bed-flatlay',         lane: 'counter', tag: 'delivery',  caption: 'Breakfast that comes to you' },
     { slug: 'bed-bag',             lane: 'counter', tag: 'delivery',  caption: 'Saturday, delivered' },
-    { slug: 'porridge-hands',      lane: 'counter', tag: 'guests',    caption: 'Porridge, still warm' },
-    { slug: 'eating-cup',          lane: 'counter', tag: 'guests',    caption: 'The cup is the plate' },
-    { slug: 'street-customer',     lane: 'counter', tag: 'guests',    caption: 'Collected at the counter' }
+    { slug: 'porridge-hands',      lane: 'counter', tag: 'customers', caption: 'Porridge, still warm' },
+    { slug: 'eating-cup',          lane: 'counter', tag: 'customers', caption: 'The cup is the plate' },
+    { slug: 'street-customer',     lane: 'counter', tag: 'customers', caption: 'Collected at the counter' }
   ]
 };
