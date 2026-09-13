@@ -298,13 +298,13 @@ a{color:inherit}
 /* --- history -------------------------------------------------------------- */
 
 .history{list-style:none;margin:0;padding:0}
-.history li{
+.history > li{
   display:grid;grid-template-columns:minmax(0,1fr) auto;
   gap:clamp(16px,3vw,44px);
   padding:clamp(28px,3.4vw,42px) 0;
   border-top:1px solid var(--rule);
 }
-.history li:last-child{border-bottom:1px solid var(--rule)}
+.history > li:last-child{border-bottom:1px solid var(--rule)}
 
 .history__course{
   font-family:var(--display);font-weight:300;font-size:26px;line-height:1;
@@ -335,9 +335,9 @@ a{color:inherit}
 .history__place{display:block;margin-top:6px;font-weight:400;color:var(--ink-3);letter-spacing:.06em}
 
 @media (max-width:760px){
-  .history li{grid-template-columns:minmax(0,1fr);row-gap:6px}
-  .history__years{grid-column:2;padding-top:0;order:3}
-  .history__course{font-size:20px}
+  .history > li{grid-template-columns:minmax(0,1fr);row-gap:0}
+  .history__years{grid-column:1;grid-row:1;padding-top:0;margin:0 0 10px}
+  .history__place{margin-top:0}
 }
 
 /* --- the menu ------------------------------------------------------------- */
@@ -635,7 +635,7 @@ a{color:inherit}
 .contact__line{margin:24px 0 0;max-width:46ch;color:var(--cover-ink-2);font-size:16px}
 
 .contact__list{
-  list-style:none;margin:clamp(44px,6vw,72px) 0 0;padding:0;
+  list-style:none;margin:0;padding:0;
   display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));
   gap:0;
 }
@@ -724,7 +724,7 @@ a.contact__val:hover{color:var(--brand);border-bottom-color:var(--brand)}
   .band{border-top:1px solid #ccc;padding-top:10pt !important;margin-top:10pt}
   .menu{grid-template-columns:repeat(2,1fr);row-gap:6pt}
   .dish__desc,.head__note{color:#333}
-  .history li{break-inside:avoid}
+  .history > li{break-inside:avoid}
   a{text-decoration:none}
 }
 
@@ -808,4 +808,37 @@ a.contact__val:hover{color:var(--brand);border-bottom-color:var(--brand)}
     background:linear-gradient(180deg,
       rgba(247,243,234,0) 0, rgba(247,243,234,.85) 56px, var(--paper) 96px);
   }
+}
+
+/* --- phone refinements ---------------------------------------------------- */
+
+@media (max-width:760px){
+  /* Snap to the first frame without scrolling the gutter away, so the lane
+     label and the first photograph keep the page margin. */
+  .lane{scroll-padding-inline:var(--gut)}
+}
+
+@media (max-width:620px){
+  /* Cover: the role wraps on a phone, so it gets less tracking. */
+  .cover__role{letter-spacing:.14em;line-height:1.7}
+
+  /* Menu: two plates to a row, so twenty-one dishes read as a menu instead of
+     ten screens of scrolling. The section tag and dotted leader need a wide
+     line to make sense, so they step aside. */
+  .menu{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px;row-gap:34px}
+  .dish__line{display:block;margin-top:12px}
+  .dish__leader,.dish__section{display:none}
+  .dish__name{font-size:16px;line-height:1.25}
+  .dish__desc{margin-top:4px;font-size:12.5px;line-height:1.45}
+  .plate{box-shadow:0 16px 22px -18px rgba(22,21,15,.5)}
+  .dish__btn:hover .plate,.dish__btn:focus-visible .plate{transform:none}
+
+  /* Week of meals: an even three-by-two grid of circles. */
+  .sets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px 8px}
+  .set__day{font-size:10px;letter-spacing:.12em}
+
+  /* EatMe: a calmer meta line, and bottles large enough to see. */
+  .house__meta{letter-spacing:.1em;line-height:1.8}
+  .house__bottles{grid-template-columns:repeat(2,1fr)}
+  .house__facts div{grid-template-columns:120px 1fr}
 }
