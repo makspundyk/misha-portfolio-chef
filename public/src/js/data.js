@@ -49,6 +49,20 @@ export const HISTORY = [
   }
 ];
 
+/** Skills, shown under the experience. Kept in step with the CV's Key Skills. */
+export const SKILLS = [
+  'Menu development and dish costing',
+  'Calorie and macronutrient calculation',
+  'Healthy, balanced meal preparation',
+  'Set menus for weight loss, fitness and everyday eating',
+  'Meat, fish, vegetable and pastry dishes',
+  'High-volume daily production',
+  'Purchasing and stock management',
+  'Packing and presentation for delivery',
+  'Teamwork and working under pressure',
+  'Discipline and reliability'
+];
+
 /**
  * Signature dishes, photographed by the chef; two angles each where available.
  * `section` is the kitchen section the dish belongs to — it says something true

@@ -6,7 +6,7 @@
  * script-src 'self', which is what stops an injected <script> from running.
  */
 
-import { CHEF, HISTORY, DISHES, SETS, HOUSE, FEED } from './data.js';
+import { CHEF, HISTORY, SKILLS, DISHES, SETS, HOUSE, FEED } from './data.js';
 
 const $  = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
@@ -65,6 +65,8 @@ $('[data-fill-history]').append(
     ])
   )
 );
+
+$('[data-fill-skills]').append(...SKILLS.map((skill) => el('li', { textContent: skill })));
 
 /* --------------------------------------------------------------------- menu */
 

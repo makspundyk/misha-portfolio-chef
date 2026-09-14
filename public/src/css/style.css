@@ -842,3 +842,23 @@ a.contact__val:hover{color:var(--brand);border-bottom-color:var(--brand)}
   .house__bottles{grid-template-columns:repeat(2,1fr)}
   .house__facts div{grid-template-columns:120px 1fr}
 }
+
+/* --- skills (under experience) ------------------------------------------- */
+
+.skillset{margin-top:clamp(40px,5vw,60px)}
+.skillset__title{
+  margin:0 0 18px;font-family:var(--display);font-weight:400;
+  font-size:clamp(24px,3vw,34px);line-height:1.1;letter-spacing:-.01em;
+}
+.skillset__list{
+  list-style:none;margin:0;padding:0;
+  display:flex;flex-wrap:wrap;gap:10px;
+}
+.skillset__list li{
+  padding:10px 16px;border:1px solid var(--rule);border-radius:999px;
+  font-size:14px;line-height:1.3;color:var(--ink-2);background:var(--paper-2);
+}
+@media (max-width:620px){
+  .skillset__list{gap:8px}
+  .skillset__list li{padding:8px 13px;font-size:13px}
+}
