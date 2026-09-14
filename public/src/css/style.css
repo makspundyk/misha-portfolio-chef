@@ -845,7 +845,7 @@ a.contact__val:hover{color:var(--brand);border-bottom-color:var(--brand)}
 
 /* --- skills (under experience) ------------------------------------------- */
 
-.skillset{margin-top:clamp(40px,5vw,60px)}
+
 .skillset__title{
   margin:0 0 18px;font-family:var(--display);font-weight:400;
   font-size:clamp(24px,3vw,34px);line-height:1.1;letter-spacing:-.01em;

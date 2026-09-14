@@ -28,28 +28,7 @@ export const CHEF = {
   ]
 };
 
-/**
- * Career, most recent first. Rendered as courses because the order carries the
- * story: each role is what the one before it made possible.
- */
-export const HISTORY = [
-  {
-    role: 'Founder and Cook',
-    venue: 'EatMe',
-    place: 'Chernivtsi, Ukraine',
-    years: '',
-    kind: 'Own kitchen · healthy food and delivery',
-    notes: [
-      'Created a set menu of five dishes to cover a whole day, selling around fifty sets a day.',
-      'Calculated the protein, fat, carbohydrates and calories for every dish myself, with separate portions for women and men.',
-      'Sold individual lunches in similar numbers — around fifty portions a day.',
-      'Worked in a team of four covering the kitchen, packing and delivery.',
-      'Handled the menu, recipes, costing and purchasing.'
-    ]
-  }
-];
-
-/** Skills, shown under the experience. Kept in step with the CV's Key Skills. */
+/** Skills, shown in the Experience section. Kept in step with the CV's Key Skills. */
 export const SKILLS = [
   'Menu development and dish costing',
   'Calorie and macronutrient calculation',

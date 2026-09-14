@@ -6,7 +6,7 @@
  * script-src 'self', which is what stops an injected <script> from running.
  */
 
-import { CHEF, HISTORY, SKILLS, DISHES, SETS, HOUSE, FEED } from './data.js';
+import { CHEF, SKILLS, DISHES, SETS, HOUSE, FEED } from './data.js';
 
 const $  = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
@@ -43,28 +43,6 @@ for (const node of $$('[data-fill]')) {
 }
 
 $('[data-fill-intro]').append(...CHEF.intro.map((text) => el('p', { textContent: text })));
-
-/* ------------------------------------------------------------------ history */
-
-$('[data-fill-history]').append(
-  ...HISTORY.map((job) =>
-    el('li', { }, [
-      el('div', {}, [
-        el('h3', { className: 'history__role' }, [
-          `${job.role}, `,
-          el('span', { className: 'history__venue', textContent: job.venue })
-        ]),
-        el('p', { className: 'history__kind', textContent: job.kind }),
-        el('ul', { className: 'history__notes' },
-          job.notes.map((note) => el('li', { textContent: note })))
-      ]),
-      el('p', { className: 'history__years' }, [
-        job.years,
-        el('span', { className: 'history__place', textContent: job.place })
-      ])
-    ])
-  )
-);
 
 $('[data-fill-skills]').append(...SKILLS.map((skill) => el('li', { textContent: skill })));
 

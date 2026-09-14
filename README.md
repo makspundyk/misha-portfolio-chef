@@ -54,7 +54,7 @@ git pull
 
 ## What is on the page
 
-Cover → About → Experience (EatMe) → The menu (21 dishes; tap a plate for the
+Cover → About → Experience (skills) → The menu (21 dishes; tap a plate for the
 photographs) → A week of meals (six day cards opened from story-style circles)
 → EatMe (facts, bottles, Instagram photo wall) → Contact.
 
@@ -98,7 +98,7 @@ port with `PORT=5000 npm run dev` (PowerShell: `$env:PORT=5000; npm run dev`).
 Everything the page shows lives in `public/src/js/data.js`:
 
 - `CHEF` — name, role, strapline, contacts, right to work, languages, intro.
-- `HISTORY` — the experience block.
+- `SKILLS` — the skills shown in the Experience section (keep in step with the CV).
 - `DISHES` — the menu. Each dish needs `<slug>.jpg` (1000 px) and
   `<slug>-full.jpg` (1400 px) in `public/assets/img/menu/`. If the dish has a
   second angle, add `<slug>-alt.jpg` and put the slug in `TWO_SHOTS` in
