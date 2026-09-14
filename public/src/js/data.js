@@ -55,7 +55,6 @@ export const SKILLS = [
   'Calorie and macronutrient calculation',
   'Healthy, balanced meal preparation',
   'Set menus for weight loss, fitness and everyday eating',
-  'Meat, fish, vegetable and pastry dishes',
   'High-volume daily production',
   'Purchasing and stock management',
   'Packing and presentation for delivery',
