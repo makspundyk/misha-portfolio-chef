@@ -637,7 +637,7 @@ a{color:inherit}
 .contact__list{
   list-style:none;margin:0;padding:0;
   display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));
-  column-gap:32px;row-gap:0;
+  column-gap:24px;row-gap:0;
 }
 .contact__list li{padding:22px 0;border-top:1px solid rgba(239,234,221,.16)}
 .contact__key{
@@ -646,10 +646,9 @@ a{color:inherit}
   color:var(--cover-ink-2);
 }
 .contact__val{
-  font-family:var(--display);font-size:clamp(17px,1.6vw,21px);font-weight:400;
+  /* Sized so the e-mail, the longest value, stays on one line in its column. */
+  font-family:var(--display);font-size:clamp(17px,1.5vw,20px);font-weight:400;
   color:var(--cover-ink);text-decoration:none;
-  /* The e-mail is the longest value; keep it inside its own column. */
-  max-width:100%;overflow-wrap:anywhere;
   border-bottom:1px solid transparent;transition:border-color .25s var(--lift),color .25s var(--lift);
 }
 a.contact__val:hover{color:var(--brand);border-bottom-color:var(--brand)}
