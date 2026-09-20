@@ -142,8 +142,6 @@ There are no environment variables or secrets to set.
 - `CHEF.available` — "Available from October 2026" is a placeholder.
 - `HOUSE.body` mentions a cold-pressed juice line, while the own brand is now
   listed as EatMe.
-- The phone number is Ukrainian; replace it with the UK number (site and CV)
-  once there is one.
 - Some feed photographs show customers. If any face is not cleared for reuse on
   a personal portfolio, delete that entry from `FEED.posts`.
 

@@ -415,7 +415,7 @@ refreshFeed();
 $('[data-fill-contact]').append(
   ...[
     ['Email',     CHEF.email,          `mailto:${CHEF.email}`],
-    ['Phone',     CHEF.phone,          `tel:${CHEF.phone.replace(/\s/g, '')}`],
+    ['Phone',     CHEF.phone,          `tel:${CHEF.phoneTel}`],
     ['Instagram', CHEF.instagramLabel, CHEF.instagram],
     ['Based in',  CHEF.seeking,        null]
   ].map(([key, value, href]) =>

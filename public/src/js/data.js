@@ -18,7 +18,9 @@ export const CHEF = {
   english: 'English B1 · Ukrainian and Russian (native)',
 
   email: 'mykhailos22@gmail.com',
-  phone: '+380 95 698 7519',
+  phone: '07827 226771',
+  // Same number with the country code, for the tel: links.
+  phoneTel: '+447827226771',
   instagram: 'https://www.instagram.com/eatme_cv.ua/',
   instagramLabel: '@eatme_cv.ua',
 
