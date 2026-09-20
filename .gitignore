@@ -13,3 +13,7 @@ assets/img/feed-src/
 
 # Local editor and assistant settings
 .claude/
+
+# Ukrainian review drafts of the CV. For Mykhailo only, not for the public repo.
+cv/cv-uk.html
+cv/Rezume-UA-chernetka.pdf
