@@ -646,8 +646,10 @@ a{color:inherit}
   color:var(--cover-ink-2);
 }
 .contact__val{
-  font-family:var(--display);font-size:clamp(18px,2vw,22px);font-weight:400;
+  font-family:var(--display);font-size:clamp(17px,1.6vw,21px);font-weight:400;
   color:var(--cover-ink);text-decoration:none;
+  /* The e-mail is the longest value; keep it inside its own column. */
+  max-width:100%;overflow-wrap:anywhere;
   border-bottom:1px solid transparent;transition:border-color .25s var(--lift),color .25s var(--lift);
 }
 a.contact__val:hover{color:var(--brand);border-bottom-color:var(--brand)}
